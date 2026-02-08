@@ -19,6 +19,18 @@
 
 ---
 
+## Pre-Exercise Facilitator Checklist
+
+- [ ] Distribute scenario overview to participants 24 hours in advance
+- [ ] Reserve conference room with whiteboard/screen sharing
+- [ ] Prepare timer for tracking response times
+- [ ] Print copies of IR Plan for reference
+- [ ] Set up shared document for capturing action items
+- [ ] Invite all required stakeholders
+- [ ] Prepare coffee/refreshments (optional but recommended!)
+
+---
+
 ## 1. Exercise Overview
 
 ### 1.1 Purpose
