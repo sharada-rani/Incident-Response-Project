@@ -146,35 +146,7 @@ start 04-IR-Workflow-Diagram.html
 
 ---
 
-## 💼 Resume Bullets
-
-Use these on your resume:
-
-> **Standard:**
-> Developed an incident response plan aligned with NIST SP 800-61 and conducted a tabletop exercise simulating a phishing incident.
-
-> **With Impact:**
-> Developed an incident response plan and led a tabletop exercise simulating a phishing incident, identifying 8 control gaps and recommending remediation actions.
-
-> **Metrics-Based:**
-> Created incident response documentation achieving 15-minute detection time and 30-minute containment, with MITRE ATT&CK technique mapping.
-
----
-
-## 🎤 Interview Questions You Can Answer
-
-After completing this project, you can confidently answer:
-
-- ✅ "Walk me through how you would handle a phishing incident"
-- ✅ "What's the difference between containment and eradication?"
-- ✅ "Who should be notified during a security incident?"
-- ✅ "How do you measure incident response effectiveness?"
-- ✅ "What is MITRE ATT&CK and how do you use it?"
-- ✅ "How does incident response tie into compliance?"
-
----
-
-## 📚 Resources & References
+##  Resources & References
 
 | Resource | Description |
 |----------|-------------|
