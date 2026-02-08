@@ -2,9 +2,11 @@
 
 ## Phishing Incident Simulation
 
-[![NIST](https://img.shields.io/badge/Framework-NIST%20SP%20800--61-blue)]()
-[![MITRE](https://img.shields.io/badge/MITRE%20ATT%26CK-Aligned-red)]()
-[![Status](https://img.shields.io/badge/Status-Complete-green)]()
+[![NIST SP 800-61](https://img.shields.io/badge/Framework-NIST%20SP%20800--61-blue?style=for-the-badge)](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final)
+[![MITRE ATT&CK](https://img.shields.io/badge/MITRE%20ATT%26CK-Aligned-red?style=for-the-badge)](https://attack.mitre.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./LICENSE)
+[![Status](https://img.shields.io/badge/Status-Complete-green?style=for-the-badge)]()
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen?style=for-the-badge)](./CONTRIBUTING.md)
 
 ---
 
