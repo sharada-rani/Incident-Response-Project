@@ -9,6 +9,18 @@
 
 ---
 
+## Remediation Tracking Dashboard
+
+| Recommendation | Priority | Owner | Due Date | Status |
+|----------------|----------|-------|----------|--------|
+| Enable MFA on all privileged accounts | Critical | IT Admin | Feb 15 | 🔴 Not Started |
+| Remove plaintext credentials | Critical | IT Admin | Feb 20 | 🔴 Not Started |
+| Implement PAM solution | High | IT Director | Mar 1 | 🟡 In Progress |
+| Deploy lookalike domain detection | High | SOC Manager | Feb 28 | 🟡 In Progress |
+| Conduct phishing simulation | Medium | Security Awareness | Mar 15 | 🔴 Not Started |
+
+---
+
 ## Executive Summary
 
 On February 8, 2026, a targeted spearphishing attack resulted in the compromise of employee credentials and subsequent unauthorized access to an administrative account. The attack was detected through a combination of user reporting and automated security alerts. The incident was contained within 45 minutes and fully remediated within 2 hours. This report documents the root cause analysis, identifies control gaps, and recommends improvements.
