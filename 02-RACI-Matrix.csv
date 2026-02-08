@@ -1,0 +1,27 @@
+Activity,SOC Analyst,Incident Response Lead,IT Administrator,Legal/Compliance,Management/CISO,Communications
+Initial Detection & Alert Triage,R,I,I,,,
+Incident Validation,R,A,C,,,
+Severity Classification,C,R/A,C,C,I,
+Incident Declaration,I,R/A,I,I,I,I
+Short-term Containment (Account Disable),C,A,R,I,I,
+Short-term Containment (Network Isolation),C,A,R,I,I,
+Long-term Containment (Firewall Rules),R,A,R,I,I,
+Evidence Collection & Preservation,R,A,C,C,,
+Malware Removal,C,A,R,,,
+Credential Reset,C,A,R,I,,
+Vulnerability Patching,I,A,R,,,
+System Recovery,C,A,R,,I,
+Business Validation,I,A,C,,R,
+Internal Notification,I,A,,,C,R
+External/Regulatory Notification,I,C,,R/A,A,C
+Customer Notification,I,C,,R,A,R
+Post-Incident Review,R,R/A,R,C,I,
+Root Cause Analysis,R,R/A,R,C,I,
+Lessons Learned Documentation,C,R/A,C,C,I,
+Process Improvement Implementation,C,A,R,C,R,
+
+RACI Legend:
+R = Responsible (Does the work)
+A = Accountable (Final decision maker)
+C = Consulted (Provides input)
+I = Informed (Kept updated)

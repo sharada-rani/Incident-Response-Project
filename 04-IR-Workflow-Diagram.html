@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Response Workflow Diagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .diagram-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        .swimlane-diagram {
+            display: grid;
+            grid-template-columns: 120px repeat(7, 1fr);
+            gap: 15px;
+            min-width: 1200px;
+        }
+
+        .swimlane-header {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            padding: 20px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .phase-header {
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 3px solid #00d4ff;
+        }
+
+        .swimlane-soc { background: linear-gradient(180deg, #00d4ff 0%, #0099cc 100%); color: #000; }
+        .swimlane-it { background: linear-gradient(180deg, #7b2cbf 0%, #5a1a8a 100%); }
+        .swimlane-legal { background: linear-gradient(180deg, #ff6b6b 0%, #cc4444 100%); }
+        .swimlane-mgmt { background: linear-gradient(180deg, #ffd93d 0%, #ccaa00 100%); color: #000; }
+
+        .cell {
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .task-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            width: 100%;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .task-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .task-box.soc { border-color: #00d4ff; background: rgba(0, 212, 255, 0.15); }
+        .task-box.it { border-color: #7b2cbf; background: rgba(123, 44, 191, 0.15); }
+        .task-box.legal { border-color: #ff6b6b; background: rgba(255, 107, 107, 0.15); }
+        .task-box.mgmt { border-color: #ffd93d; background: rgba(255, 217, 61, 0.15); }
+
+        .task-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .arrow-down {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #00d4ff;
+            z-index: 10;
+        }
+
+        .arrow-right {
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid #00d4ff;
+            z-index: 10;
+        }
+
+        .decision-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            transform: rotate(45deg);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .decision-text {
+            transform: rotate(-45deg);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .phase-indicator {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .phase-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .phase-dot.active {
+            background: #00d4ff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .nist-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .task-box {
+                border: 2px solid #333;
+                background: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Incident Response Workflow</h1>
+            <p class="subtitle">Phishing Incident Response Swimlane Diagram</p>
+            <div class="nist-badge">NIST SP 800-61 Aligned</div>
+        </header>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color swimlane-soc"></div>
+                <span>SOC / Security Team</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color swimlane-it"></div>
+                <span>IT Operations</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color swimlane-legal"></div>
+                <span>Legal / Compliance</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color swimlane-mgmt"></div>
+                <span>Management / CISO</span>
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <div class="swimlane-diagram">
+                <!-- Header Row -->
+                <div></div>
+                <div class="phase-header">1️⃣ Detection</div>
+                <div class="phase-header">2️⃣ Validation</div>
+                <div class="phase-header">3️⃣ Containment</div>
+                <div class="phase-header">4️⃣ Eradication</div>
+                <div class="phase-header">5️⃣ Recovery</div>
+                <div class="phase-header">6️⃣ Lessons Learned</div>
+                <div class="phase-header">7️⃣ Closure</div>
+
+                <!-- SOC Row -->
+                <div class="swimlane-header swimlane-soc">SOC ANALYST</div>
+                <div class="cell">
+                    <div class="task-box soc">
+                        <div class="task-icon">🔔</div>
+                        <div>Receive Alert / User Report</div>
+                        <div class="arrow-right"></div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box soc">
+                        <div class="task-icon">🔍</div>
+                        <div>Analyze IOCs & Correlate Events</div>
+                        <div class="arrow-right"></div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box soc">
+                        <div class="task-icon">🚫</div>
+                        <div>Block Malicious IPs/Domains</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box soc">
+                        <div class="task-icon">🧹</div>
+                        <div>Update Detection Rules</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box soc">
+                        <div class="task-icon">📊</div>
+                        <div>Enhanced Monitoring</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box soc">
+                        <div class="task-icon">📝</div>
+                        <div>Document Timeline & IOCs</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box soc">
+                        <div class="task-icon">📋</div>
+                        <div>Complete Incident Ticket</div>
+                    </div>
+                </div>
+
+                <!-- IT Row -->
+                <div class="swimlane-header swimlane-it">IT ADMINISTRATOR</div>
+                <div class="cell"></div>
+                <div class="cell">
+                    <div class="task-box it">
+                        <div class="task-icon">💻</div>
+                        <div>Collect System Logs</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box it">
+                        <div class="task-icon">🔒</div>
+                        <div>Disable Accounts<br>Isolate Systems</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box it">
+                        <div class="task-icon">🔑</div>
+                        <div>Reset Credentials<br>Remove Malware</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box it">
+                        <div class="task-icon">♻️</div>
+                        <div>Restore Systems<br>Validate Function</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box it">
+                        <div class="task-icon">⚙️</div>
+                        <div>Implement Controls<br>Patch Systems</div>
+                    </div>
+                </div>
+                <div class="cell"></div>
+
+                <!-- Legal Row -->
+                <div class="swimlane-header swimlane-legal">LEGAL / COMPLIANCE</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell">
+                    <div class="task-box legal">
+                        <div class="task-icon">📜</div>
+                        <div>Advise on Evidence Preservation</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box legal">
+                        <div class="task-icon">⚖️</div>
+                        <div>Assess Regulatory Requirements</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box legal">
+                        <div class="task-icon">📤</div>
+                        <div>Draft Notifications (if needed)</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box legal">
+                        <div class="task-icon">✅</div>
+                        <div>Confirm Compliance Requirements Met</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box legal">
+                        <div class="task-icon">📁</div>
+                        <div>Archive Legal Documentation</div>
+                    </div>
+                </div>
+
+                <!-- Management Row -->
+                <div class="swimlane-header swimlane-mgmt">MANAGEMENT / CISO</div>
+                <div class="cell"></div>
+                <div class="cell">
+                    <div class="task-box mgmt">
+                        <div class="task-icon">🎯</div>
+                        <div>Declare Incident Severity</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box mgmt">
+                        <div class="task-icon">📢</div>
+                        <div>Approve Containment Actions</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box mgmt">
+                        <div class="task-icon">📣</div>
+                        <div>Coordinate Communications</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box mgmt">
+                        <div class="task-icon">✔️</div>
+                        <div>Approve Business Resumption</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box mgmt">
+                        <div class="task-icon">📈</div>
+                        <div>Review & Approve Improvements</div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="task-box mgmt">
+                        <div class="task-icon">🏁</div>
+                        <div>Close Incident</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Incident Response Workflow Diagram | Aligned with NIST SP 800-61r2</p>
+            <p>© 2026 Acme Financial Services | Incident Response Program</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add hover effects and animations
+        document.querySelectorAll('.task-box').forEach(box => {
+            box.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            box.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
