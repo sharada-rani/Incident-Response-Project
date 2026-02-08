@@ -7,6 +7,20 @@
 
 ---
 
+## Quick Reference Card
+
+| Phase | Key Actions | Time Target |
+|-------|-------------|-------------|
+| **Detection** | Validate alert, gather IOCs | Immediate |
+| **Containment** | Disable accounts, isolate systems | < 30 min |
+| **Eradication** | Remove malware, reset credentials | < 4 hours |
+| **Recovery** | Restore from backup, validate function | < 24 hours |
+| **Lessons Learned** | Root cause analysis, update procedures | < 2 weeks |
+
+**Emergency Contacts:** See Section 3.3
+
+---
+
 ## Table of Contents
 
 1. [Purpose & Scope](#1-purpose--scope)
